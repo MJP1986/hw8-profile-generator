@@ -3,7 +3,7 @@ const colors = {
     wrapperBackground: "#E6E1C3",
     headerBackground: "#C1C72C",
     headerColor: "black",
-    photoBorderColor: "#black"
+    photoBorderColor: "black"
   },
   blue: {
     wrapperBackground: "#5F64D3",
@@ -26,6 +26,7 @@ const colors = {
 };
 
 function generateHTML(data) {
+  console.log(data);
   return `<!DOCTYPE html>
   <html lang="en">
      <head>
@@ -34,6 +35,7 @@ function generateHTML(data) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
         <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <title>Document</title>
         <style>
             @page {
@@ -51,7 +53,7 @@ function generateHTML(data) {
            html, body, .wrapper {
            height: 100%;
            }
-           .wrapper {                 
+           .wrapper {
            background-color: ${colors[data.color].wrapperBackground};
            padding-top: 100px;
            }
@@ -170,7 +172,62 @@ function generateHTML(data) {
               zoom: .75; 
             } 
            }
-        </style>`;
+        </style>
+        </head>
+<body>
+  <div class="container wrapper">
+    <div class="row">
+      <div class="card photo-header">
+        <img src=${data.profileIMG}>
+        <h1>Hi!</h1>
+        <h1>My Name Is ${data.name} </h1>
+        <h3>currently working with ${data.company}</h3>
+        <h4 class="links-nav">
+        <i class="fas fa-location-arrow fa-lg"></i><a href="https://www.google.com/maps/place/${
+          data.location
+        }" class="nav-link">Location</a>
+        <i class="fab fa-github-square fa-lg"></i><a href="${
+          data.profileURL
+        }" class="nav-link">Github</a>
+        <i class="fas fa-blog fa-lg fa-lg"></i><a href="${
+          data.blog
+        }" class="nav-link">Blog</a>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="col">${data.bio}</h4>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card wrapper">
+          <h3>Repositories</h3>
+          <h4>${data.repoNum}</h4>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card wrapper">
+          <h3>Followers</h3>
+          <h4>${data.followersNum}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card wrapper">
+          <h3>Github Stars</h3>
+          <h4>${data.stargazersCount}</h4>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card wrapper">
+          <h3>Following</h3>
+          <h4>${data.followingNum}</h4>
+        </div>
+      </div>
+    </div>
+    </div>
+</body>`;
 }
 
 module.exports = generateHTML;
